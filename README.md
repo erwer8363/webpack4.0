@@ -9,9 +9,15 @@ webpack4.0搭建
 - yarn add postcss-loader autoprefixer -D 添加前缀loader和插件 这个要配置一个postcss.config.js文件,才能使用
 - yarn add optimize-css-assets-webpack-plugin -D 压缩css插件
 - yarn add uglifyjs-webpack-plugin -D 压缩js插件
-
-##webpack 可以进行0配置
+- yarn add babel @babel/core @babel/preset-env -D 添加babel模块  @babel/core 核心模块,调用transform方法转换  @/babel/preset-env 把一些高级语法转换为低级语法
+- yarn add @babel/plugin-proposal-class-properties -D 解析class语法
+- yarn add @babel/plugin-transform-runtime -D
+- yarn add @babel/runtime
+- yarn add expose-loader -D  暴露给window
+# webpack 可以进行0配置
 - 打包工具->输出的结果(js模块) npx webpack
+- expose-loader 暴露全局的loader 内联的loader
+- pre 前面执行的loader normal 普通loader 内联loader  后置 postloader
 
 ## 手动配置webpack
 - 默认配置文件的名字 webpack.config.js
