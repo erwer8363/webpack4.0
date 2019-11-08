@@ -15,8 +15,12 @@ fun()
 
 class A {
     a = 10
+
+    constructor() {
+        console.lo('ssdfsdfsdf')
+    }
 }
 
+new A()
 'aaa'.includes('a')
 
-console.log($)

@@ -20,11 +20,12 @@ module.exports = {
             new OptimizeCss({})
         ]
     },
-    mode: "development", // production 生产模式, development 开发模式
+    // mode: "development", // production 生产模式, development 开发模式
     entry: './src/index.js', // 打包入口
     output: {
         filename: "bundle.[hash:8].js", // 打包后的出口文件名
-        path: path.resolve(__dirname, 'dist') // 路径必须是一个绝对路径
+        path: path.resolve(__dirname, 'dist'), // 路径必须是一个绝对路径
+        publicPath: "/"
     },
     devServer: {
         port: 3880,
@@ -43,7 +44,7 @@ module.exports = {
             hash: true
         }),
         new MiniCssExtractPlugin({
-            filename: 'main.css'
+            filename: 'css/main.css'
         })
         // new Webpack.ProvidePlugin({
         //     $: 'jquery'
@@ -52,6 +53,11 @@ module.exports = {
     externals: {
         jquery: '$'
     },
+    // 源码映射,会单独生成一个sourceMap文件
+    // devtool: "source-map",// 增加源码映射,便于调试
+    // devtool: "eval-source-map", // 会显示行和列,不会产生单独的文件
+    // devtool: "cheap-module-source-map", // 不会显示行和列, 会产生单独的文件
+    devtool: "cheap-module-eval-source-map", // 不会生成文件,集成在打包的文件中,不会产生行和列
     module: {
         rules: [
             {
@@ -69,6 +75,19 @@ module.exports = {
             //     include: path.resolve(__dirname, 'src'),
             //     exclude: /node_moudules/
             // },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 1,
+                        fallback: 'responsive-loader',
+                        quality: 75,
+                        mimetype: 'image/jpg',
+                        outputPath: 'img/'
+                    }
+                }
+            },
             {
                 test: /\.js$/,
                 use: {
